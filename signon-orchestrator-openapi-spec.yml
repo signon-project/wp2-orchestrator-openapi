@@ -1,0 +1,552 @@
+# Copyright 2021-2023 FINCONS GROUP AG within the Horizon 2020
+# European project SignON under grant agreement no. 101017255.
+
+# Licensed under the Apache License, Version 2.0 (the "License"); 
+# you may not use this file except in compliance with the License. 
+# You may obtain a copy of the License at 
+
+#     http://www.apache.org/licenses/LICENSE-2.0 
+
+# Unless required by applicable law or agreed to in writing, software 
+# distributed under the License is distributed on an "AS IS" BASIS, 
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
+# See the License for the specific language governing permissions and 
+# limitations under the License.
+
+openapi: 3.0.0
+info:
+  version: '14.0.1'
+  title: SignON Orchestrator OpenAPI
+  description: This specs describe the REST API of the SignON Orchestrator
+servers:
+  - url: signon-api-endpoint/orchestrator
+tags:
+  - name: /message
+  - name: /inference-storage-auth
+  - name: /version
+  - name: /consent-form
+  - name: /dataset-storage-auth
+  - name: /eaf-format
+  - name: /status
+  - name: /endpoints
+paths:
+
+  /message:
+    post:
+      summary: JSON Message Between App and orchestrator
+      operationId: sendMessage
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AppToOrchestrator'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrchestratorToApp'
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: 'signon-orchestrator-shared-schemas/signon-orchestrator-shared-schemas.yml#/sharedSchemas/Error'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: 'signon-orchestrator-shared-schemas/signon-orchestrator-shared-schemas.yml#/sharedSchemas/Error'
+    x-codegen-request-body-name: message
+
+  /inference-storage-auth:
+    get:
+      summary: Request Credentials for the App to write on Minio
+      operationId: getInferenceStorageAuth
+      parameters:
+        - name: appInstanceID
+          in: query
+          schema:
+            type: string
+          example: "0000"
+          description: Identifier to recognize which instance of the app is requesting permission to upload an object on Minio.
+        - name: fileFormat
+          in: query
+          schema:
+            type: string
+          example: wav
+          description: The format in which the file containing data regarding the video or the audio given by the user is saved.
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inference-storage-auth-response'
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: 'signon-orchestrator-shared-schemas/signon-orchestrator-shared-schemas.yml#/sharedSchemas/Error'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: 'signon-orchestrator-shared-schemas/signon-orchestrator-shared-schemas.yml#/sharedSchemas/Error'
+
+  /dataset-storage-auth:
+    get:
+      summary: Request Credentials for the App to write on Minio
+      operationId: getDatasetStorageAuth
+      parameters:
+        - name: hashPhoneNUmber
+          in: query
+          schema:
+            type: string
+          example: "0000"
+          description: Identifier to recognize which instance of the app is requesting permission to upload an object on Minio.
+        - name: metadata
+          in: query
+          schema:
+            $ref: '#/components/schemas/Metadata'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inference-storage-auth-response'
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: 'signon-orchestrator-shared-schemas/signon-orchestrator-shared-schemas.yml#/sharedSchemas/Error'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: 'signon-orchestrator-shared-schemas/signon-orchestrator-shared-schemas.yml#/sharedSchemas/Error'
+
+  /version:
+    get:
+      summary: Request Version Number related to Orchestrator, OpenAPI and AsyncAPI
+      operationId: getVersion
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/version'
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: 'signon-orchestrator-shared-schemas/signon-orchestrator-shared-schemas.yml#/sharedSchemas/Error'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: 'signon-orchestrator-shared-schemas/signon-orchestrator-shared-schemas.yml#/sharedSchemas/Error'
+
+  /status:
+    get:
+      summary: Request status relative to the Orchestrator
+      operationId: getStatus
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/status'
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: 'signon-orchestrator-shared-schemas/signon-orchestrator-shared-schemas.yml#/sharedSchemas/Error'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: 'signon-orchestrator-shared-schemas/signon-orchestrator-shared-schemas.yml#/sharedSchemas/Error'
+
+  /endpoints:
+    get:
+      summary: Request to return all the possible Endpoints
+      operationId: getEndpoints
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/endpoints'
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: 'signon-orchestrator-shared-schemas/signon-orchestrator-shared-schemas.yml#/sharedSchemas/Error'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: 'signon-orchestrator-shared-schemas/signon-orchestrator-shared-schemas.yml#/sharedSchemas/Error'
+
+  /eaf-format:
+    post:
+      summary: Format data in EAF Annotation Format for ELAN  (https://archive.mpi.nl/tla/elan)
+      operationId: getEafFormat
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EafFormatRequest'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EafFormatResponse'
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: 'signon-orchestrator-shared-schemas/signon-orchestrator-shared-schemas.yml#/sharedSchemas/Error'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: 'signon-orchestrator-shared-schemas/signon-orchestrator-shared-schemas.yml#/sharedSchemas/Error'
+
+  /consent-form:
+    get:
+      summary: Return Consent Form
+      operationId: getConsentForm
+      parameters:
+        - name: language
+          in: query
+          description: Language in which you want the consent-form
+          required: true
+          schema:
+            $ref: 'signon-orchestrator-shared-schemas/signon-orchestrator-shared-schemas.yml#/sharedSchemas/Languages'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/consentFormResponse'
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: 'signon-orchestrator-shared-schemas/signon-orchestrator-shared-schemas.yml#/sharedSchemas/Error'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: 'signon-orchestrator-shared-schemas/signon-orchestrator-shared-schemas.yml#/sharedSchemas/Error'
+
+components:
+  schemas:
+    AppToOrchestrator:
+      type: object
+      required:
+        - App
+      properties:
+        App:
+          $ref: 'signon-orchestrator-shared-schemas/signon-orchestrator-shared-schemas.yml#/sharedSchemas/App'
+
+    OrchestratorToApp:
+      type: object
+      required:
+        - App
+        - OrchestratorRequest
+        - OrchestratorResponse
+        - RabbitMQ
+        - SourceLanguageProcessing
+        - IntermediateRepresentation
+        - MessageSynthesis
+      properties:
+        App:
+          $ref: 'signon-orchestrator-shared-schemas/signon-orchestrator-shared-schemas.yml#/sharedSchemas/App'
+        OrchestratorRequest:
+          $ref: 'signon-orchestrator-shared-schemas/signon-orchestrator-shared-schemas.yml#/sharedSchemas/OrchestratorRequest'
+        OrchestratorResponse:
+          $ref: '#/components/schemas/OrchestratorResponse'
+        RabbitMQ:
+          $ref: 'signon-orchestrator-shared-schemas/signon-orchestrator-shared-schemas.yml#/sharedSchemas/RabbitMQ'
+        SourceLanguageProcessing:
+          $ref: 'signon-orchestrator-shared-schemas/signon-orchestrator-shared-schemas.yml#/sharedSchemas/SourceLanguageProcessing'
+        IntermediateRepresentation:
+          $ref: 'signon-orchestrator-shared-schemas/signon-orchestrator-shared-schemas.yml#/sharedSchemas/IntermediateRepresentation'
+        MessageSynthesis:
+          $ref: 'signon-orchestrator-shared-schemas/signon-orchestrator-shared-schemas.yml#/sharedSchemas/MessageSynthesis'
+
+    OrchestratorResponse:
+      type: object
+      required:
+        - T5Orchestrator
+      properties:
+        T5Orchestrator:
+          type: number
+          example: 1508484592123
+          description: Timestamp at which the message has been sent from the Orchestrator
+            to the App in milliseconds
+
+    dataset-storage-auth-request:
+      type: object
+      required:
+        - hashPhoneNumber
+        - metadata
+      properties:
+        hashPhoneNumber:
+          type: string
+          example: "0000"
+          description: Identifier to recognize which instance of the app is requesting permission to upload an object on Minio.
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+
+    inference-storage-auth-request:
+      type: object
+      required:
+        - appInstanceID
+        - fileFormat
+      properties:
+        appInstanceID:
+          type: string
+          example: "0000"
+          description: Identifier to recognize which instance of the app is requesting permission to upload an object on Minio.
+        fileFormat:
+          type: string
+          example: wav
+          description: The format in which the file containing data regarding the video or the audio given by the user is saved.
+
+    inference-storage-auth-response:
+      type: object
+      required:
+        - PreSignedURL
+        - ObjectName
+
+      properties:
+        PreSignedURL:
+          type: string
+          example: https://signon-api-endpoint:9000/signon/0000/2022-03-09_11-58-42_520_4fdf3b28-bb15-47c8-8ed9-632477b27555.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=XXX&X-Amz-Date=20220309T105842Z&X-Amz-Expires=300&X-Amz-SignedHeaders=host&X-Amz-Signature=XXX
+          description: URL to upload an object in Minio
+        ObjectName:
+          type: string
+          example: 0000/2022-03-09_11-58-42_520_4fdf3b28-bb15-47c8-8ed9-632477b27555.jpg
+          description: name of the object once uploaded on Minio (<appInstanceID>/<yyyy-MM-dd_HH-mm-ss_SSS>_<UUID><fileFormat>)
+
+    version:
+      type: object
+      required:
+        - Orchestrator
+        - OpenAPI
+        - AsyncAPI
+      properties:
+        Orchestrator:
+          type: string
+          example: 1.0.0
+          description: Orchestrator Version Number
+        OpenAPI:
+          type: string
+          example: 1.0.0
+          description: OpenAPI Version Number
+        AsyncAPI:
+          type: string
+          example: 1.0.0
+          description: AsyncAPI Version Number
+
+    status:
+      type: object
+      required:
+        - Value
+      properties:
+        Value:
+          type: string
+          example: UP
+          description: Field that describes the status of the orchestrator
+
+    endpoints:
+      type: array
+      items:
+        type: string
+
+    consentFormRequest:
+      type: object
+      required:
+        - language
+      properties:
+        language:
+          $ref: 'signon-orchestrator-shared-schemas/signon-orchestrator-shared-schemas.yml#/sharedSchemas/Languages'
+
+    consentFormResponse:
+      type: object
+      required:
+        - language
+        - content
+        - version
+      properties:
+        language:
+          $ref: 'signon-orchestrator-shared-schemas/signon-orchestrator-shared-schemas.yml#/sharedSchemas/Languages'
+        content:
+          type: string
+          example: https://player.vimeo.com/video/560360825
+          description: the text/plain string relative to the consent Form or the Sign Language Video
+        version:
+          type: string
+          example: 0.0.1
+          description: the version relative to the consentForm
+
+    EafFormatRequest:
+      type: object
+      required:
+        - annotations
+        - fileName
+        - fileFormat
+        - metadata
+      properties:
+        fileName:
+          type: string
+          example: myFile
+          description: The name of the file containing video or audio given by the user.
+        fileFormat:
+          type: string
+          example: wav
+          description: The format in which the file containing video or audio given by the user is saved.
+        annotations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Annotation'
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+
+    EafFormatResponse:
+      type: object
+      required:
+        - eafData
+      properties:
+        eafData:
+          type: string
+          format: base64
+          description: EAF Annotation Format for ELAN (https://archive.mpi.nl/tla/elan)
+
+    consentForm:
+      type: string
+
+    Annotation:
+      type: object
+      required:
+        - time_start_ms
+        - time_stop_ms
+        - transcription
+      properties:
+        time_start_ms:
+          type: integer
+          example: 1234
+          description: Start time (in milliseconds) of the annotation
+        time_stop_ms:
+          type: integer
+          example: 4321
+          description: Stop time (in milliseconds) of the annotation
+        transcription:
+          type: string
+          example: Lorem ipsum
+          description: Text of the annotation, in the language specified in annotationsLanguage
+
+    Metadata:
+      type: object
+      required:
+        - sourceLanguage
+        - annotationLanguage
+        - messageType
+        - languageType
+        - register
+        - age
+        - gender
+        - hearingStatus
+        - fileType
+        - userID
+      properties:
+        sourceLanguage:
+          $ref: 'signon-orchestrator-shared-schemas/signon-orchestrator-shared-schemas.yml#/sharedSchemas/Languages'
+        annotationLanguage:
+          $ref: 'signon-orchestrator-shared-schemas/signon-orchestrator-shared-schemas.yml#/sharedSchemas/Languages'
+        messageType:
+          type: string
+          enum:
+            - Social media post
+          example: Social media post
+          description: what kind of text is involved (a social media post versus a university lecture versus bar talk) (Hospitality use case)
+        languageType:
+          type: string
+          enum:
+            - Elicited
+          example: Elicited
+          description: the degree to which the text was prepared, the degree of spontaneity
+        register:
+          type: string
+          enum:
+           - Semi-formal
+          example: Semi-formal
+          description: “Situational language use” in other words from which “situation” a text originates, rather a formal/professional setting (a university lecture) or rather an informal setting (bar talk)
+        age:
+          type: string
+          enum:
+            - 18-30
+            - 31-45
+            - 46-60
+            - 60+
+            - PreferNotToAnswer
+          example: 16-30
+          description: What is the age (category) of the user
+        gender:
+          type: string
+          enum:
+            - Male
+            - Female
+            - Other
+            - PreferNotToAnswer
+          example: Male
+          description: What is the gender of the user
+        hearingStatus:
+          type: string
+          enum:
+            - Deaf
+            - HardOfHearing
+            - Hearing
+            - PreferNotToAnswer
+          example: Deaf
+          description: What is the hearing status of the user
+        fileType:
+          type: string
+          enum:
+            - AUDIO
+            - VIDEO
+          example: VIDEO
+          description: The type of the object that is going to be stored in Minio
+        userID:
+          type: string
+          example: "0000"
+          description: Identifier to recognize which instance of the app is requesting permission to upload an object on Minio.

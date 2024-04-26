@@ -1,0 +1,892 @@
+<!doctype html>
+<html>
+  <head>
+    <title>SignON Orchestrator OpenAPI</title>
+    <style type="text/css">
+      body {
+	font-family: Trebuchet MS, sans-serif;
+	font-size: 15px;
+	color: #444;
+	margin-right: 24px;
+}
+
+h1	{
+	font-size: 25px;
+}
+h2	{
+	font-size: 20px;
+}
+h3	{
+	font-size: 16px;
+	font-weight: bold;
+}
+hr	{
+	height: 1px;
+	border: 0;
+	color: #ddd;
+	background-color: #ddd;
+}
+
+.app-desc {
+  clear: both;
+  margin-left: 20px;
+}
+.param-name {
+  width: 100%;
+}
+.license-info {
+  margin-left: 20px;
+}
+
+.license-url {
+  margin-left: 20px;
+}
+
+.model {
+  margin: 0 0 0px 20px;
+}
+
+.method {
+  margin-left: 20px;
+}
+
+.method-notes	{
+	margin: 10px 0 20px 0;
+	font-size: 90%;
+	color: #555;
+}
+
+pre {
+  padding: 10px;
+  margin-bottom: 2px;
+}
+
+.http-method {
+ text-transform: uppercase;
+}
+
+pre.get {
+  background-color: #0f6ab4;
+}
+
+pre.post {
+  background-color: #10a54a;
+}
+
+pre.put {
+  background-color: #c5862b;
+}
+
+pre.delete {
+  background-color: #a41e22;
+}
+
+.huge	{
+	color: #fff;
+}
+
+pre.example {
+  background-color: #f3f3f3;
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+code {
+  white-space: pre;
+}
+
+.nickname {
+  font-weight: bold;
+}
+
+.method-path {
+  font-size: 1.5em;
+  background-color: #0f6ab4;
+}
+
+.up {
+  float:right;
+}
+
+.parameter {
+  width: 500px;
+}
+
+.param {
+  width: 500px;
+  padding: 10px 0 0 20px;
+  font-weight: bold;
+}
+
+.param-desc {
+  width: 700px;
+  padding: 0 0 0 20px;
+  color: #777;
+}
+
+.param-type {
+  font-style: italic;
+}
+
+.param-enum-header {
+width: 700px;
+padding: 0 0 0 60px;
+color: #777;
+font-weight: bold;
+}
+
+.param-enum {
+width: 700px;
+padding: 0 0 0 80px;
+color: #777;
+font-style: italic;
+}
+
+.field-label {
+  padding: 0;
+  margin: 0;
+  clear: both;
+}
+
+.field-items	{
+	padding: 0 0 15px 0;
+	margin-bottom: 15px;
+}
+
+.return-type {
+  clear: both;
+  padding-bottom: 10px;
+}
+
+.param-header {
+  font-weight: bold;
+}
+
+.method-tags {
+  text-align: right;
+}
+
+.method-tag {
+  background: none repeat scroll 0% 0% #24A600;
+  border-radius: 3px;
+  padding: 2px 10px;
+  margin: 2px;
+  color: #FFF;
+  display: inline-block;
+  text-decoration: none;
+}
+
+    </style>
+  </head>
+  <body>
+  <h1>SignON Orchestrator OpenAPI</h1>
+    <div class="app-desc">This specs describe the REST API of the SignON Orchestrator</div>
+    <div class="app-desc">More information: <a href="https://openapi-generator.tech">https://openapi-generator.tech</a></div>
+    <div class="app-desc">Contact Info: <a href="team@openapitools.org">team@openapitools.org</a></div>
+    <div class="app-desc">Version: 14.0.1</div>
+    <div class="app-desc">BasePath:/orchestrator</div>
+    <div class="license-info">All rights reserved</div>
+    <div class="license-url">http://apache.org/licenses/LICENSE-2.0.html</div>
+  <h2>Access</h2>
+
+  <h2><a name="__Methods">Methods</a></h2>
+  [ Jump to <a href="#__Models">Models</a> ]
+
+  <h3>Table of Contents </h3>
+  <div class="method-summary"></div>
+  <h4><a href="#Default">Default</a></h4>
+  <ul>
+  <li><a href="#getConsentForm"><code><span class="http-method">get</span> /consent-form</code></a></li>
+  <li><a href="#getDatasetStorageAuth"><code><span class="http-method">get</span> /dataset-storage-auth</code></a></li>
+  <li><a href="#getEafFormat"><code><span class="http-method">post</span> /eaf-format</code></a></li>
+  <li><a href="#getEndpoints"><code><span class="http-method">get</span> /endpoints</code></a></li>
+  <li><a href="#getInferenceStorageAuth"><code><span class="http-method">get</span> /inference-storage-auth</code></a></li>
+  <li><a href="#getStatus"><code><span class="http-method">get</span> /status</code></a></li>
+  <li><a href="#getVersion"><code><span class="http-method">get</span> /version</code></a></li>
+  <li><a href="#sendMessage"><code><span class="http-method">post</span> /message</code></a></li>
+  </ul>
+
+  <h1><a name="Default">Default</a></h1>
+  <div class="method"><a name="getConsentForm"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /consent-form</code></pre></div>
+    <div class="method-summary">Return Consent Form (<span class="nickname">getConsentForm</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">language (required)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Language in which you want the consent-form default: null </div>
+    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#consentFormResponse">consentFormResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "language" : "SPA",
+  "version" : "0.0.1",
+  "content" : "https://player.vimeo.com/video/560360825"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#consentFormResponse">consentFormResponse</a>
+    <h4 class="field-label">400</h4>
+    Bad Request
+        <a href="#Error">Error</a>
+    <h4 class="field-label">500</h4>
+    Internal Server Error
+        <a href="#Error">Error</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getDatasetStorageAuth"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /dataset-storage-auth</code></pre></div>
+    <div class="method-summary">Request Credentials for the App to write on Minio (<span class="nickname">getDatasetStorageAuth</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">hashPhoneNUmber (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Identifier to recognize which instance of the app is requesting permission to upload an object on Minio. default: null </div><div class="param">metadata (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div>
+    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#inference-storage-auth-response">inference-storage-auth-response</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "PreSignedURL" : "https://signon-api-endpoint:9000/signon/0000/2022-03-09_11-58-42_520_4fdf3b28-bb15-47c8-8ed9-632477b27555.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=XXX&X-Amz-Date=20220309T105842Z&X-Amz-Expires=300&X-Amz-SignedHeaders=host&X-Amz-Signature=XXX",
+  "ObjectName" : "0000/2022-03-09_11-58-42_520_4fdf3b28-bb15-47c8-8ed9-632477b27555.jpg"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#inference-storage-auth-response">inference-storage-auth-response</a>
+    <h4 class="field-label">400</h4>
+    Bad Request
+        <a href="#Error">Error</a>
+    <h4 class="field-label">500</h4>
+    Internal Server Error
+        <a href="#Error">Error</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getEafFormat"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /eaf-format</code></pre></div>
+    <div class="method-summary">Format data in EAF Annotation Format for ELAN  (https://archive.mpi.nl/tla/elan) (<span class="nickname">getEafFormat</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">EafFormatRequest <a href="#EafFormatRequest">EafFormatRequest</a> (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+
+    </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#EafFormatResponse">EafFormatResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "eafData" : "eafData"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#EafFormatResponse">EafFormatResponse</a>
+    <h4 class="field-label">400</h4>
+    Bad Request
+        <a href="#Error">Error</a>
+    <h4 class="field-label">500</h4>
+    Internal Server Error
+        <a href="#Error">Error</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getEndpoints"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /endpoints</code></pre></div>
+    <div class="method-summary">Request to return all the possible Endpoints (<span class="nickname">getEndpoints</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      array[String]
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>""</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        
+    <h4 class="field-label">400</h4>
+    Bad Request
+        <a href="#Error">Error</a>
+    <h4 class="field-label">500</h4>
+    Internal Server Error
+        <a href="#Error">Error</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getInferenceStorageAuth"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /inference-storage-auth</code></pre></div>
+    <div class="method-summary">Request Credentials for the App to write on Minio (<span class="nickname">getInferenceStorageAuth</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">appInstanceID (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Identifier to recognize which instance of the app is requesting permission to upload an object on Minio. default: null </div><div class="param">fileFormat (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; The format in which the file containing data regarding the video or the audio given by the user is saved. default: null </div>
+    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#inference-storage-auth-response">inference-storage-auth-response</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "PreSignedURL" : "https://signon-api-endpoint:9000/signon/0000/2022-03-09_11-58-42_520_4fdf3b28-bb15-47c8-8ed9-632477b27555.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=XXX&X-Amz-Date=20220309T105842Z&X-Amz-Expires=300&X-Amz-SignedHeaders=host&X-Amz-Signature=XXX",
+  "ObjectName" : "0000/2022-03-09_11-58-42_520_4fdf3b28-bb15-47c8-8ed9-632477b27555.jpg"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#inference-storage-auth-response">inference-storage-auth-response</a>
+    <h4 class="field-label">400</h4>
+    Bad Request
+        <a href="#Error">Error</a>
+    <h4 class="field-label">500</h4>
+    Internal Server Error
+        <a href="#Error">Error</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getStatus"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /status</code></pre></div>
+    <div class="method-summary">Request status relative to the Orchestrator (<span class="nickname">getStatus</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#status">status</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "Value" : "UP"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#status">status</a>
+    <h4 class="field-label">400</h4>
+    Bad Request
+        <a href="#Error">Error</a>
+    <h4 class="field-label">500</h4>
+    Internal Server Error
+        <a href="#Error">Error</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getVersion"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /version</code></pre></div>
+    <div class="method-summary">Request Version Number related to Orchestrator, OpenAPI and AsyncAPI (<span class="nickname">getVersion</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#version">version</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "AsyncAPI" : "1.0.0",
+  "Orchestrator" : "1.0.0",
+  "OpenAPI" : "1.0.0"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#version">version</a>
+    <h4 class="field-label">400</h4>
+    Bad Request
+        <a href="#Error">Error</a>
+    <h4 class="field-label">500</h4>
+    Internal Server Error
+        <a href="#Error">Error</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="sendMessage"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /message</code></pre></div>
+    <div class="method-summary">JSON Message Between App and orchestrator (<span class="nickname">sendMessage</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">AppToOrchestrator <a href="#AppToOrchestrator">AppToOrchestrator</a> (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+
+    </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#OrchestratorToApp">OrchestratorToApp</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "App" : {
+    "sourceKey" : "NONE",
+    "sourceFileFormat" : "wav",
+    "appVersion" : "0.1.0",
+    "sourceMode" : "TEXT",
+    "sourceText" : "Hello Bob, How are you?",
+    "sourceVideoResolution" : "NONE",
+    "sourceVideoFrameRate" : -1,
+    "sourceAudioCodec" : "NONE",
+    "appInstanceID" : "instance16",
+    "sourceVideoPixelFormat" : "NONE",
+    "sourceAudioSampleRate" : -1,
+    "T0App" : 1508484583259,
+    "sourceVideoCodec" : "NONE",
+    "translationMode" : "TEXT",
+    "sourceAudioChannels" : "NONE",
+    "translationLanguage" : "SPA",
+    "sourceLanguage" : "SPA"
+  },
+  "RabbitMQ" : {
+    "replyTo" : "rabbitmq.requests_id23",
+    "correlationID" : "signon.rpc.requests_id23"
+  },
+  "OrchestratorRequest" : {
+    "bucketName" : "signon",
+    "T1Orchestrator" : 1508484583788,
+    "OrchestratorVersion" : "0.1.0"
+  },
+  "SourceLanguageProcessing" : "SourceLanguageProcessing",
+  "OrchestratorResponse" : {
+    "T5Orchestrator" : 1508484592123
+  },
+  "IntermediateRepresentation" : "IntermediateRepresentation",
+  "MessageSynthesis" : "MessageSynthesis"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#OrchestratorToApp">OrchestratorToApp</a>
+    <h4 class="field-label">400</h4>
+    Bad Request
+        <a href="#Error">Error</a>
+    <h4 class="field-label">500</h4>
+    Internal Server Error
+        <a href="#Error">Error</a>
+  </div> <!-- method -->
+  <hr/>
+
+  <h2><a name="__Models">Models</a></h2>
+  [ Jump to <a href="#__Methods">Methods</a> ]
+
+  <h3>Table of Contents</h3>
+  <ol>
+    <li><a href="#Annotation"><code>Annotation</code> - </a></li>
+    <li><a href="#App"><code>App</code> - </a></li>
+    <li><a href="#AppToOrchestrator"><code>AppToOrchestrator</code> - </a></li>
+    <li><a href="#EafFormatRequest"><code>EafFormatRequest</code> - </a></li>
+    <li><a href="#EafFormatResponse"><code>EafFormatResponse</code> - </a></li>
+    <li><a href="#Error"><code>Error</code> - </a></li>
+    <li><a href="#Languages"><code>Languages</code> - </a></li>
+    <li><a href="#Metadata"><code>Metadata</code> - </a></li>
+    <li><a href="#OrchestratorRequest"><code>OrchestratorRequest</code> - </a></li>
+    <li><a href="#OrchestratorResponse"><code>OrchestratorResponse</code> - </a></li>
+    <li><a href="#OrchestratorToApp"><code>OrchestratorToApp</code> - </a></li>
+    <li><a href="#RabbitMQ"><code>RabbitMQ</code> - </a></li>
+    <li><a href="#consentFormRequest"><code>consentFormRequest</code> - </a></li>
+    <li><a href="#consentFormResponse"><code>consentFormResponse</code> - </a></li>
+    <li><a href="#dataset-storage-auth-request"><code>dataset-storage-auth-request</code> - </a></li>
+    <li><a href="#inference-storage-auth-request"><code>inference-storage-auth-request</code> - </a></li>
+    <li><a href="#inference-storage-auth-response"><code>inference-storage-auth-response</code> - </a></li>
+    <li><a href="#status"><code>status</code> - </a></li>
+    <li><a href="#version"><code>version</code> - </a></li>
+  </ol>
+
+  <div class="model">
+    <h3><a name="Annotation"><code>Annotation</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">time_start_ms </div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> Start time (in milliseconds) of the annotation </div>
+<div class="param">time_stop_ms </div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> Stop time (in milliseconds) of the annotation </div>
+<div class="param">transcription </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Text of the annotation, in the language specified in annotationsLanguage </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="App"><code>App</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>Built by the App, it contains values regarding the input given by the User</div>
+    <div class="field-items">
+      <div class="param">sourceKey </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Where to find the video or the audio given by the user, if value not available use &quot;NONE&quot;. </div>
+<div class="param">sourceText </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Text that the user wants to be translated, if value not available use &quot;NONE&quot;. </div>
+<div class="param">sourceLanguage </div><div class="param-desc"><span class="param-type"><a href="#Languages">Languages</a></span>  </div>
+<div class="param">sourceMode </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> ENUM representing the mode in which the message is given by the user. </div>
+        <div class="param-enum-header">Enum:</div>
+        <div class="param-enum">VIDEO</div><div class="param-enum">AUDIO</div><div class="param-enum">TEXT</div>
+<div class="param">sourceFileFormat </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> The format in which the file containing data regarding the video or the audio given by the user is saved, if value not available use &quot;NONE&quot;. </div>
+<div class="param">sourceVideoCodec </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> The codec used to compress the video, if value not available use &quot;NONE&quot;. </div>
+<div class="param">sourceVideoResolution </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> The resolution used for the video, if value not available use &quot;NONE&quot;. </div>
+<div class="param">sourceVideoFrameRate </div><div class="param-desc"><span class="param-type"><a href="#number">BigDecimal</a></span> The frame rate used for the video, if value not available use &quot;-1&quot;. </div>
+<div class="param">sourceVideoPixelFormat </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> The pixel format used for the video, if value not available use &quot;NONE&quot;. </div>
+<div class="param">sourceAudioCodec </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> The codec used to compress the audio, if value not available use &quot;NONE&quot;. </div>
+<div class="param">sourceAudioChannels </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> The channels used for the audio, if value not available use &quot;NONE&quot;. </div>
+<div class="param">sourceAudioSampleRate </div><div class="param-desc"><span class="param-type"><a href="#number">BigDecimal</a></span> The sample rate used for the audio, if value not available use &quot;-1&quot;. </div>
+<div class="param">translationLanguage </div><div class="param-desc"><span class="param-type"><a href="#Languages">Languages</a></span>  </div>
+<div class="param">translationMode </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> ENUM representing the mode in which the message has to be returned to the user. </div>
+        <div class="param-enum-header">Enum:</div>
+        <div class="param-enum">AVATAR</div><div class="param-enum">AUDIO</div><div class="param-enum">TEXT</div>
+<div class="param">appInstanceID </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Identifier to recognize which instance of the app has sent the message. </div>
+<div class="param">appVersion </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> App Version Number </div>
+<div class="param">T0App </div><div class="param-desc"><span class="param-type"><a href="#number">BigDecimal</a></span> Timestamp at which the message has been sent from the App to the orchestrator (yyyy-MM-dd HH:mm:ss,SSS). </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="AppToOrchestrator"><code>AppToOrchestrator</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">App </div><div class="param-desc"><span class="param-type"><a href="#App">App</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="EafFormatRequest"><code>EafFormatRequest</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">fileName </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> The name of the file containing video or audio given by the user. </div>
+<div class="param">fileFormat </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> The format in which the file containing video or audio given by the user is saved. </div>
+<div class="param">annotations </div><div class="param-desc"><span class="param-type"><a href="#Annotation">array[Annotation]</a></span>  </div>
+<div class="param">metadata </div><div class="param-desc"><span class="param-type"><a href="#Metadata">Metadata</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="EafFormatResponse"><code>EafFormatResponse</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">eafData </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> EAF Annotation Format for ELAN (https://archive.mpi.nl/tla/elan) format: base64</div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Error"><code>Error</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>Schema for the Error Message</div>
+    <div class="field-items">
+      <div class="param">type (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> URI that identifies the problem type </div>
+<div class="param">title (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Human readable short description of the error </div>
+<div class="param">status (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> Repetition of the response status code </div>
+<div class="param">detail (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Human readable full description of the error </div>
+<div class="param">instance (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> URI reference that identifies the specific occurrence of the problem </div>
+<div class="param">stackTrace (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Stack trace of the error </div>
+<div class="param">timestamp (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Timestamp of the error </div>
+<div class="param">parameters (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Relevant parameter </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Languages"><code>Languages</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>ENUM representing the language in which the message is given by the user. VGT = Flemish Sign Language, SSP = Spanish Sign Language, BFI = British Sign Language, ISG = Irish Sign Language, DSE = Dutch Sign Language, ENG = English, GLE = Irish, NLD = Dutch / Flemish, SPA = Castillan, Spanish (for more info look at ISO 639-3 website https://iso639-3.sil.org/).</div>
+    <div class="field-items">
+          </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Metadata"><code>Metadata</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">sourceLanguage </div><div class="param-desc"><span class="param-type"><a href="#Languages">Languages</a></span>  </div>
+<div class="param">annotationLanguage </div><div class="param-desc"><span class="param-type"><a href="#Languages">Languages</a></span>  </div>
+<div class="param">messageType </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> what kind of text is involved (a social media post versus a university lecture versus bar talk) (Hospitality use case) </div>
+        <div class="param-enum-header">Enum:</div>
+        <div class="param-enum">Social media post</div>
+<div class="param">languageType </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> the degree to which the text was prepared, the degree of spontaneity </div>
+        <div class="param-enum-header">Enum:</div>
+        <div class="param-enum">Elicited</div>
+<div class="param">register </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> “Situational language use” in other words from which “situation” a text originates, rather a formal/professional setting (a university lecture) or rather an informal setting (bar talk) </div>
+        <div class="param-enum-header">Enum:</div>
+        <div class="param-enum">Semi-formal</div>
+<div class="param">age </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> What is the age (category) of the user </div>
+        <div class="param-enum-header">Enum:</div>
+        <div class="param-enum">18-30</div><div class="param-enum">31-45</div><div class="param-enum">46-60</div><div class="param-enum">60+</div><div class="param-enum">PreferNotToAnswer</div>
+<div class="param">gender </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> What is the gender of the user </div>
+        <div class="param-enum-header">Enum:</div>
+        <div class="param-enum">Male</div><div class="param-enum">Female</div><div class="param-enum">Other</div><div class="param-enum">PreferNotToAnswer</div>
+<div class="param">hearingStatus </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> What is the hearing status of the user </div>
+        <div class="param-enum-header">Enum:</div>
+        <div class="param-enum">Deaf</div><div class="param-enum">HardOfHearing</div><div class="param-enum">Hearing</div><div class="param-enum">PreferNotToAnswer</div>
+<div class="param">fileType </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> The type of the object that is going to be stored in Minio </div>
+        <div class="param-enum-header">Enum:</div>
+        <div class="param-enum">AUDIO</div><div class="param-enum">VIDEO</div>
+<div class="param">userID </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Identifier to recognize which instance of the app is requesting permission to upload an object on Minio. </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="OrchestratorRequest"><code>OrchestratorRequest</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>Built by the Orchestrator, it contains some additional values</div>
+    <div class="field-items">
+      <div class="param">OrchestratorVersion </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Orchestrator Version Number </div>
+<div class="param">T1Orchestrator </div><div class="param-desc"><span class="param-type"><a href="#long">Long</a></span> Timestamp at which the message has been sent from the orchestrator to WP3 in milliseconds format: int64</div>
+<div class="param">bucketName </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Name of the Minio Bucket which contains the file relative to the object that was sent. </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="OrchestratorResponse"><code>OrchestratorResponse</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">T5Orchestrator </div><div class="param-desc"><span class="param-type"><a href="#number">BigDecimal</a></span> Timestamp at which the message has been sent from the Orchestrator to the App in milliseconds </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="OrchestratorToApp"><code>OrchestratorToApp</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">App </div><div class="param-desc"><span class="param-type"><a href="#App">App</a></span>  </div>
+<div class="param">OrchestratorRequest </div><div class="param-desc"><span class="param-type"><a href="#OrchestratorRequest">OrchestratorRequest</a></span>  </div>
+<div class="param">OrchestratorResponse </div><div class="param-desc"><span class="param-type"><a href="#OrchestratorResponse">OrchestratorResponse</a></span>  </div>
+<div class="param">RabbitMQ </div><div class="param-desc"><span class="param-type"><a href="#RabbitMQ">RabbitMQ</a></span>  </div>
+<div class="param">SourceLanguageProcessing </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">IntermediateRepresentation </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">MessageSynthesis </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="RabbitMQ"><code>RabbitMQ</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>Parameters needed for the RPC Pattern implemented by RabbitMQ</div>
+    <div class="field-items">
+      <div class="param">correlationID (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Component generated automatically by rabbitMQ needed by WP2 for the correct handling of messages. </div>
+<div class="param">replyTo (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Component generated automatically by rabbitMQ needed by WP2 for the correct handling of messages. </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="consentFormRequest"><code>consentFormRequest</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">language </div><div class="param-desc"><span class="param-type"><a href="#Languages">Languages</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="consentFormResponse"><code>consentFormResponse</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">language </div><div class="param-desc"><span class="param-type"><a href="#Languages">Languages</a></span>  </div>
+<div class="param">content </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> the text/plain string relative to the consent Form or the Sign Language Video </div>
+<div class="param">version </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> the version relative to the consentForm </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="dataset-storage-auth-request"><code>dataset-storage-auth-request</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">hashPhoneNumber </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Identifier to recognize which instance of the app is requesting permission to upload an object on Minio. </div>
+<div class="param">metadata </div><div class="param-desc"><span class="param-type"><a href="#Metadata">Metadata</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="inference-storage-auth-request"><code>inference-storage-auth-request</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">appInstanceID </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Identifier to recognize which instance of the app is requesting permission to upload an object on Minio. </div>
+<div class="param">fileFormat </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> The format in which the file containing data regarding the video or the audio given by the user is saved. </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="inference-storage-auth-response"><code>inference-storage-auth-response</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">PreSignedURL </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> URL to upload an object in Minio </div>
+<div class="param">ObjectName </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> name of the object once uploaded on Minio (<appInstanceID>/&lt;yyyy-MM-dd_HH-mm-ss_SSS&gt;_<UUID><fileFormat>) </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="status"><code>status</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">Value </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Field that describes the status of the orchestrator </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="version"><code>version</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">Orchestrator </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Orchestrator Version Number </div>
+<div class="param">OpenAPI </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> OpenAPI Version Number </div>
+<div class="param">AsyncAPI </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> AsyncAPI Version Number </div>
+    </div>  <!-- field-items -->
+  </div>
+  </body>
+</html>
